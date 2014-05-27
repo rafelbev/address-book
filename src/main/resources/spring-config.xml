@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:batch="http://www.springframework.org/schema/batch"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+
+    <bean id="jobRepository" class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean">
+        <property name="transactionManager" ref="transactionManager" />
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.batch.support.transaction.ResourcelessTransactionManager" />
+
+    <bean id="jobLauncher" class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
+        <property name="jobRepository" ref="jobRepository" />
+    </bean>
+
+    <bean name="bookEntryReader" class="org.springframework.batch.item.file.FlatFileItemReader">
+        <property name="resource" value="classpath:AddressBook" />
+        <property name="lineMapper" ref="lineMapper" />
+    </bean>
+
+    <bean name="lineMapper"
+          class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
+        <property name="fieldSetMapper" ref="fieldsetMapper" />
+        <property name="lineTokenizer" ref="tokeniser" />
+    </bean>
+
+    <bean name="fieldsetMapper" class="com.springapp.batch.mapper.BookEntryFieldSetMapper" />
+
+    <bean name="tokeniser" class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer" />
+
+    <bean id="bookEntryWriter" class="com.springapp.batch.writer.BookEntryWriter" />
+
+    <batch:job id="mainJob">
+        <batch:step id="step">
+            <batch:tasklet>
+                <batch:chunk reader="bookEntryReader" writer="bookEntryWriter" commit-interval="10"/>
+            </batch:tasklet>
+        </batch:step>
+    </batch:job>
+
+</beans>
