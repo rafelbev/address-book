@@ -26,7 +26,7 @@ public class CompareEntryTest {
         when(bill.getDateOfBirth()).thenReturn(DateTime.parse("1970-01-08T12:30:49+05:30"));
         when(paul.getDateOfBirth()).thenReturn(DateTime.parse("1970-01-09T15:30:49+05:30"));
 
-        Assert.assertEquals(1, Days.daysBetween(bill.getDateOfBirth(), paul.getDateOfBirth()).getDays());
+        Assert.assertEquals(1, bill.compareTo(paul));
     }
 
 }
