@@ -39,4 +39,14 @@ public class BookEntry {
             throw new RuntimeException("Sex of entry is unknown");
         }
     }
+
+    public boolean isOlder(BookEntry otherEntry) {
+        if (otherEntry == null) {
+            return true;
+        }
+        if ((getDateOfBirth() == null) || (otherEntry.getDateOfBirth() == null)) {
+            throw new RuntimeException("DOB is missing. Can't evaluate if the person is older");
+        }
+        return (getDateOfBirth().isBefore(otherEntry.getDateOfBirth()));
+    }
 }
