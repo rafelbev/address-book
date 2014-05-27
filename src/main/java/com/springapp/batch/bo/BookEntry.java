@@ -27,4 +27,16 @@ public class BookEntry {
         DateTime parsedDateOfBirth = dateTimeFormatter.parseDateTime(dateOfBirth);
         setDateOfBirth(parsedDateOfBirth);
     }
+
+    public boolean isMale() {
+        if (sex != null) {
+            if (sex.equals(Gender.MALE)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            throw new RuntimeException("Sex of entry is unknown");
+        }
+    }
 }
