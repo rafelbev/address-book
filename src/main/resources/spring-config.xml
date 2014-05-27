@@ -28,12 +28,12 @@
 
     <bean name="tokeniser" class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer" />
 
-    <bean id="bookEntryWriter" class="com.springapp.batch.writer.BookEntryWriter" />
+    <bean id="maleCounterWriter" class="com.springapp.batch.writer.MaleCounterWriter" />
 
     <batch:job id="mainJob">
-        <batch:step id="step">
+        <batch:step id="maleCounter">
             <batch:tasklet>
-                <batch:chunk reader="bookEntryReader" writer="bookEntryWriter" commit-interval="10"/>
+                <batch:chunk reader="bookEntryReader" writer="maleCounterWriter" commit-interval="10"/>
             </batch:tasklet>
         </batch:step>
     </batch:job>
