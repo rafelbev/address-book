@@ -2,21 +2,16 @@ package com.springapp.batch;
 
 import com.springapp.batch.bo.BookEntry;
 import org.joda.time.DateTime;
-import org.joda.time.Days;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class CompareEntryTest {
-
-    private static Logger logger = LoggerFactory.getLogger(CompareEntryTest.class);
 
     @Test
     public void testJob() throws Exception {
