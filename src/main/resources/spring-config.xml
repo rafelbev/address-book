@@ -29,11 +29,17 @@
     <bean name="tokeniser" class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer" />
 
     <bean id="maleCounterWriter" class="com.springapp.batch.writer.MaleCounterWriter" />
+    <bean id="oldestPersonWriter" class="com.springapp.batch.writer.OldestPersonWriter" />
 
     <batch:job id="mainJob">
-        <batch:step id="maleCounter">
+        <batch:step id="maleCounter" next="oldestPerson">
             <batch:tasklet>
                 <batch:chunk reader="bookEntryReader" writer="maleCounterWriter" commit-interval="10"/>
+            </batch:tasklet>
+        </batch:step>
+        <batch:step id="oldestPerson">
+            <batch:tasklet>
+                <batch:chunk reader="bookEntryReader" writer="oldestPersonWriter" commit-interval="10"/>
             </batch:tasklet>
         </batch:step>
     </batch:job>
