@@ -3,10 +3,9 @@ package com.springapp.batch.bo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Builder;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 
 import java.io.Serializable;
 
@@ -15,21 +14,13 @@ import java.io.Serializable;
  */
 @Data
 @NoArgsConstructor
+@Builder
 @AllArgsConstructor
 public class BookEntry implements Serializable, Comparable<BookEntry> {
 
     private String name;
     private Gender sex;
     private DateTime dateOfBirth;
-
-    public BookEntry(String name, String sex, String dateOfBirth) {
-        this();
-        setName(name);
-        setSex(Gender.customValueOf(sex));
-        DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("dd/MM/yy");
-        DateTime parsedDateOfBirth = dateTimeFormatter.parseDateTime(dateOfBirth);
-        setDateOfBirth(parsedDateOfBirth);
-    }
 
     public boolean isMale() {
         if (sex != null) {
