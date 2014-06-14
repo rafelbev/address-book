@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:batch="http://www.springframework.org/schema/batch"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config />
+    <context:component-scan base-package="com.springapp" />
 
     <bean id="jobRepository" class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean">
         <property name="transactionManager" ref="transactionManager" />
@@ -17,17 +21,6 @@
         <property name="resource" value="classpath:AddressBook" />
         <property name="lineMapper" ref="lineMapper" />
     </bean>
-
-    <bean name="lineMapper"
-          class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
-        <property name="fieldSetMapper" ref="personFieldsetMapper" />
-        <property name="lineTokenizer" ref="tokeniser" />
-    </bean>
-
-    <bean name="personFieldsetMapper" class="com.springapp.batch.mapper.PersonFieldSetMapper" />
-    <bean name="basicPersonFieldsetMapper" class="com.springapp.batch.mapper.BasicPersonFieldSetMapper" />
-
-    <bean name="tokeniser" class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer" />
 
     <bean id="maleCounterWriter" class="com.springapp.batch.writer.MaleCounterWriter" />
     <bean id="oldestPersonWriter" class="com.springapp.batch.writer.OldestPersonWriter" />
