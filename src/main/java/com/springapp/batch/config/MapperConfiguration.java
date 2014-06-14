@@ -4,6 +4,7 @@ import com.springapp.batch.mapper.BasicPersonFieldSetMapper;
 import com.springapp.batch.mapper.PersonFieldSetMapper;
 import org.springframework.batch.item.file.LineMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
+import org.springframework.batch.item.file.mapping.FieldSetMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.batch.item.file.transform.LineTokenizer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,17 +27,19 @@ public class MapperConfiguration {
 
     @Bean
     public LineMapper personLineMapper() {
-        DefaultLineMapper mapper = new DefaultLineMapper();
-        mapper.setFieldSetMapper(personFieldSetMapper);
-        mapper.setLineTokenizer(tokenizer());
-        return mapper;
+        return bootstrapLineMapper(personFieldSetMapper);
     }
 
     @Bean
     public LineMapper basicPersonLineMapper() {
+        return bootstrapLineMapper(basicPersonFieldSetMapper);
+    }
+
+    private LineMapper bootstrapLineMapper(FieldSetMapper fieldSetMapper) {
         DefaultLineMapper mapper = new DefaultLineMapper();
-        mapper.setFieldSetMapper(basicPersonFieldSetMapper);
+        mapper.setFieldSetMapper(fieldSetMapper);
         mapper.setLineTokenizer(tokenizer());
         return mapper;
     }
+
 }
