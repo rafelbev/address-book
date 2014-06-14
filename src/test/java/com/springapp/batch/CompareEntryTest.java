@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -33,4 +34,17 @@ public class CompareEntryTest {
         Assert.assertEquals(1, bill.compareTo(paul));
     }
 
+    @Test
+    public void testPersonWithInvalidDate() throws Exception {
+        Person bill = mock(Person.class);
+        Person invalidPerson = null;
+
+        when(bill.getDateOfBirth()).thenReturn(DateTime.parse(BILL_DOB));
+
+        try {
+            bill.compareTo(invalidPerson);
+            fail("Exception should have been thrown");
+        } catch (Exception e) {
+        }
+    }
 }
