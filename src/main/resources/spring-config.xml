@@ -17,9 +17,14 @@
         <property name="jobRepository" ref="jobRepository" />
     </bean>
 
-    <bean name="bookEntryReader" class="org.springframework.batch.item.file.FlatFileItemReader">
+    <bean name="personReader" class="org.springframework.batch.item.file.FlatFileItemReader">
         <property name="resource" value="classpath:AddressBook" />
-        <property name="lineMapper" ref="lineMapper" />
+        <property name="lineMapper" ref="personLineMapper" />
+    </bean>
+
+    <bean name="basicPersonReader" class="org.springframework.batch.item.file.FlatFileItemReader">
+        <property name="resource" value="classpath:AddressBook" />
+        <property name="lineMapper" ref="basicPersonLineMapper" />
     </bean>
 
     <bean id="maleCounterWriter" class="com.springapp.batch.writer.MaleCounterWriter" />
@@ -28,12 +33,12 @@
     <batch:job id="mainJob">
         <batch:step id="maleCounter" next="oldestPerson">
             <batch:tasklet>
-                <batch:chunk reader="bookEntryReader" writer="maleCounterWriter" commit-interval="10"/>
+                <batch:chunk reader="basicPersonReader" writer="maleCounterWriter" commit-interval="10"/>
             </batch:tasklet>
         </batch:step>
         <batch:step id="oldestPerson">
             <batch:tasklet>
-                <batch:chunk reader="bookEntryReader" writer="oldestPersonWriter" commit-interval="10"/>
+                <batch:chunk reader="personReader" writer="oldestPersonWriter" commit-interval="10"/>
             </batch:tasklet>
         </batch:step>
     </batch:job>
