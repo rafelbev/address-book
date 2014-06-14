@@ -37,7 +37,7 @@ public class CompareEntryTest {
     }
 
     @Test
-    public void testNullParameter() throws Exception {
+    public void testNullParameter() {
         Person bill = mock(Person.class);
         Person invalidPerson = null;
 
@@ -53,7 +53,7 @@ public class CompareEntryTest {
     }
 
     @Test
-    public void testInvalidDateInParameter() throws Exception {
+    public void testInvalidDateInParameter() {
         Person bill = mock(Person.class);
         Person invalidPerson = mock(Person.class);
 
@@ -70,7 +70,7 @@ public class CompareEntryTest {
 
 
     @Test
-    public void testInvalidDateInObject() throws Exception {
+    public void testInvalidDateInObject() {
         Person invalidPerson = mock(Person.class);
         Person bill = mock(Person.class);
 
