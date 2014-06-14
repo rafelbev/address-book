@@ -19,9 +19,9 @@ public class PersonFieldSetMapper implements FieldSetMapper<Person> {
 
         Person person = Person.builder()
                 .name(fieldSet.readString(0))
-                .sex(sex)
                 .dateOfBirth(parsedDateOfBirth)
                 .build();
+        person.setSex(sex);
 
         return person;
     }

@@ -10,29 +10,16 @@ import org.joda.time.Days;
 import java.io.Serializable;
 
 /**
- * BO used to describe rows found insider the AddressBook
+ * BO used to describe all fields in a row found insider the AddressBook
  */
 @Data
 @NoArgsConstructor
-@Builder
+@Builder(fluent = true)
 @AllArgsConstructor
-public class Person implements Serializable, Comparable<Person> {
+public class Person extends BasicPerson implements Serializable, Comparable<Person> {
 
     private String name;
-    private Gender sex;
     private DateTime dateOfBirth;
-
-    public boolean isMale() {
-        if (sex != null) {
-            if (sex.equals(Gender.MALE)) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            throw new RuntimeException("Sex of entry is unknown");
-        }
-    }
 
     public boolean isOlder(Person otherEntry) {
         if (otherEntry == null) {
