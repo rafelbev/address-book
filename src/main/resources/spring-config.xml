@@ -20,11 +20,12 @@
 
     <bean name="lineMapper"
           class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
-        <property name="fieldSetMapper" ref="fieldsetMapper" />
+        <property name="fieldSetMapper" ref="personFieldsetMapper" />
         <property name="lineTokenizer" ref="tokeniser" />
     </bean>
 
-    <bean name="fieldsetMapper" class="com.springapp.batch.mapper.PersonFieldSetMapper" />
+    <bean name="personFieldsetMapper" class="com.springapp.batch.mapper.PersonFieldSetMapper" />
+    <bean name="basicPersonFieldsetMapper" class="com.springapp.batch.mapper.BasicPersonFieldSetMapper" />
 
     <bean name="tokeniser" class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer" />
 
