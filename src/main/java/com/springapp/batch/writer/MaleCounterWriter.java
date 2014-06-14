@@ -1,6 +1,6 @@
 package com.springapp.batch.writer;
 
-import com.springapp.batch.bo.BookEntry;
+import com.springapp.batch.bo.Person;
 import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.StepExecutionListener;
@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-public class MaleCounterWriter implements ItemWriter<BookEntry>, StepExecutionListener {
+public class MaleCounterWriter implements ItemWriter<Person>, StepExecutionListener {
 
     private static Logger logger = LoggerFactory.getLogger(MaleCounterWriter.class);
 
@@ -20,8 +20,8 @@ public class MaleCounterWriter implements ItemWriter<BookEntry>, StepExecutionLi
     private int males = 0;
 
     @Override
-    public void write(List<? extends BookEntry> items) throws Exception {
-        for (BookEntry currentPerson : items) {
+    public void write(List<? extends Person> items) throws Exception {
+        for (Person currentPerson : items) {
             if (currentPerson.isMale()) {
                 logger.debug(currentPerson.getName());
                 males++;

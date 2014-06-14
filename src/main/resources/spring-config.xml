@@ -24,7 +24,7 @@
         <property name="lineTokenizer" ref="tokeniser" />
     </bean>
 
-    <bean name="fieldsetMapper" class="com.springapp.batch.mapper.BookEntryFieldSetMapper" />
+    <bean name="fieldsetMapper" class="com.springapp.batch.mapper.PersonFieldSetMapper" />
 
     <bean name="tokeniser" class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer" />
 

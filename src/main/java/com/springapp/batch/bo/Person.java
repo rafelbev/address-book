@@ -16,7 +16,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
-public class BookEntry implements Serializable, Comparable<BookEntry> {
+public class Person implements Serializable, Comparable<Person> {
 
     private String name;
     private Gender sex;
@@ -34,7 +34,7 @@ public class BookEntry implements Serializable, Comparable<BookEntry> {
         }
     }
 
-    public boolean isOlder(BookEntry otherEntry) {
+    public boolean isOlder(Person otherEntry) {
         if (otherEntry == null) {
             return true;
         }
@@ -45,7 +45,7 @@ public class BookEntry implements Serializable, Comparable<BookEntry> {
     }
 
     @Override
-    public int compareTo(BookEntry otherEntry) {
+    public int compareTo(Person otherEntry) {
         if (otherEntry == null) {
             throw new RuntimeException("Missing object to compareTo");
         }

@@ -1,6 +1,6 @@
 package com.springapp.batch;
 
-import com.springapp.batch.bo.BookEntry;
+import com.springapp.batch.bo.Person;
 import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Test;
@@ -18,8 +18,8 @@ public class CompareEntryTest {
 
     @Test
     public void testJob() throws Exception {
-        BookEntry bill = mock(BookEntry.class);
-        BookEntry paul = mock(BookEntry.class);
+        Person bill = mock(Person.class);
+        Person paul = mock(Person.class);
 
         when(bill.getDateOfBirth()).thenReturn(DateTime.parse(BILL_DOB));
         when(paul.getDateOfBirth()).thenReturn(DateTime.parse(PAUL_DOB));
