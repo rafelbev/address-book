@@ -39,6 +39,6 @@ public class Person extends BasicPerson implements Serializable, Comparable<Pers
         if ((getDateOfBirth() == null) || (otherEntry.getDateOfBirth() == null)) {
             throw new RuntimeException("DOB is missing. Can't evaluate if the person is older");
         }
-        return Days.daysBetween(getDateOfBirth(), getDateOfBirth()).getDays();
+        return Days.daysBetween(getDateOfBirth(), otherEntry.getDateOfBirth()).getDays();
     }
 }
