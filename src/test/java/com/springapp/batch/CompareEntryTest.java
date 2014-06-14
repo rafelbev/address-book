@@ -37,7 +37,7 @@ public class CompareEntryTest {
     }
 
     @Test
-    public void testPersonWithInvalidDate() throws Exception {
+    public void testNullParameter() throws Exception {
         Person bill = mock(Person.class);
         Person invalidPerson = null;
 
@@ -47,6 +47,40 @@ public class CompareEntryTest {
 
         try {
             bill.compareTo(invalidPerson);
+            fail("Exception should have been thrown");
+        } catch (Exception e) {
+        }
+    }
+
+    @Test
+    public void testInvalidDateInParameter() throws Exception {
+        Person bill = mock(Person.class);
+        Person invalidPerson = mock(Person.class);
+
+        when(bill.getDateOfBirth()).thenReturn(DateTime.parse(BILL_DOB));
+        when(invalidPerson.getDateOfBirth()).thenReturn(null);
+        when(bill.compareTo(invalidPerson)).thenCallRealMethod();
+
+        try {
+            bill.compareTo(invalidPerson);
+            fail("Exception should have been thrown");
+        } catch (Exception e) {
+        }
+    }
+
+
+    @Test
+    public void testInvalidDateInObject() throws Exception {
+        Person invalidPerson = mock(Person.class);
+        Person bill = mock(Person.class);
+
+        when(invalidPerson.getDateOfBirth()).thenReturn(null);
+        when(bill.getDateOfBirth()).thenReturn(DateTime.parse(BILL_DOB));
+
+        when(invalidPerson.compareTo(bill)).thenCallRealMethod();
+
+        try {
+            invalidPerson.compareTo(bill);
             fail("Exception should have been thrown");
         } catch (Exception e) {
         }
