@@ -31,6 +31,8 @@ public class CompareEntryTest {
         when(bill.getDateOfBirth()).thenReturn(DateTime.parse(BILL_DOB));
         when(paul.getDateOfBirth()).thenReturn(DateTime.parse(PAUL_DOB));
 
+        when(bill.compareTo(paul)).thenCallRealMethod();
+
         Assert.assertEquals(1, bill.compareTo(paul));
     }
 
@@ -40,6 +42,8 @@ public class CompareEntryTest {
         Person invalidPerson = null;
 
         when(bill.getDateOfBirth()).thenReturn(DateTime.parse(BILL_DOB));
+
+        when(bill.compareTo(invalidPerson)).thenCallRealMethod();
 
         try {
             bill.compareTo(invalidPerson);
